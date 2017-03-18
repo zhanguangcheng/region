@@ -70,8 +70,7 @@ class Region
         return trim(strtr($str, array(
             "<span style='mso-spacerun:yes'>" => '',
             "</span>" => '',
-            '   ' => ''
-        )));
+        )), '  ');
     }
 
     /**
