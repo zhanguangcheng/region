@@ -7,7 +7,7 @@
  */
 class Region
 {
-    private $url = 'http://www.mca.gov.cn/article/sj/tjbz/a/2017/20170301/2017%E5%B9%B41%E6%9C%88%E5%8E%BF%E4%BB%A5%E4%B8%8A%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81.html';
+    private $url = 'http://www.mca.gov.cn/article/sj/tjbz/a/2017/20178/201709251028.html';
 
     private $tabName = 'region';
 
@@ -92,6 +92,7 @@ class Region
         foreach ($province as &$pro) {
             if (in_array($pro['name'], $this->city)) {
                 $citys = array($pro);
+                $citys[0]['code'] += 100;
                 $area = array_filter($list, function ($v) use($pro) {
                     return !strncmp($v['code'], $pro['code'], 2)
                         && $v['code'] % 10000 !== 0;
