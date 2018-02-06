@@ -101,12 +101,14 @@ class Region
             } else {
                 $citys = array_filter($list, function($v) use($pro) {
                     return !strncmp($v['code'], $pro['code'], 2)
-                        && $v['code'] % 100 === 0
+                        // 省直辖的县级行政单位第3,4位是90开始的，县级市就从9001，各县就从9021开始排。
+                        && ($v['code'] % 100 === 0 || substr($v['code'], 2, 2) === '90')
                         && $v['code'] % 10000 !== 0;
                 });
                 foreach ($citys as &$city) {
                     $area = array_filter($list, function($v) use($city) {
                         return !strncmp($v['code'], $city['code'], 4)
+                            && substr($city['code'], 2, 2) !== '90'
                             && $v['code'] % 100 !== 0;
                     });
                     $city['sub'] = $area;
